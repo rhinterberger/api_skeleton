@@ -17,3 +17,5 @@ Folders:
 
 
 Used some ideas from https://github.com/santiq/bulletproof-nodejs
+
+Warning: Don't use out of the box. Review carefully. Also some stuff ist not finished yet!
