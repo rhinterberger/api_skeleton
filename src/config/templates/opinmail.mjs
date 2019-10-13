@@ -1,0 +1,1 @@
+let mail = 'asdadasd ${token}';

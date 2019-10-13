@@ -1,0 +1,1 @@
+select * from users where uuid = $1::text limit 1;
