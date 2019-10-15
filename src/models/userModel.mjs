@@ -33,7 +33,7 @@ export default class UserModel {
     {
             await this.db.queryCreateUser(user);
             return this.getUserByName(user.username);
-     }
+    }
 
     async setStatus(uid, status)
     {
@@ -52,7 +52,6 @@ export default class UserModel {
 
     async confirm(token, type)
     {
-        await this.db.queryConfirm(type, token, this.config.activationexpire);
+        await this.db.queryConfirm(type, token, this.config.token.activationexpire);
     }
-
 };

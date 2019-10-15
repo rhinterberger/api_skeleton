@@ -48,6 +48,26 @@ export default class UserService {
         await this.User.confirm(token,'register');
     }
 
+    async beginPwReset(uuid)
+    {
+        try
+        {
+            let user=await this.User.getUserByUuid(uuid);
+            this.eventEmitter.emit("sendPasswordReset", user.username, await this.generateActivationToken('resetpass',user.uuid));
+            this.Logger.info("Passwordreset sent: " + user.uuid);
+
+        }
+        catch (e) {
+            this.Logger.info("Start Password-Reset failed: %o",e);
+        }
+    }
+
+    async confirmPwReset(token)
+    {
+        await this.User.confirm(token,'resetpass');
+    }
+
+
     async getUserByName(username)
     {
         return await this.User.getUserByName(username);
@@ -70,10 +90,11 @@ export default class UserService {
 
     async generateActivationToken(type,uuid)
     {
-        const token=crypto.randomBytes(24).toString('base64');
+        const token=crypto.randomBytes(24).toString('hex');
         try{
             await this.User.newConfirmation(type,uuid,token);
         }
+
         catch(e)
         {
             this.Logger.error("Create confirmations Failed : %s",e);

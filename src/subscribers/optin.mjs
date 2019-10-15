@@ -23,7 +23,7 @@ async function composeMail(to, token)
       text: `
       Welcome to our Service. To activate your account please confirm your email address
       by clicking the following link:
-      http://localhost:3000/api/v1/user/confirmregister?token=${token}
+      ${config.baseURL}/${config.api.prefix}/user/confirmregister?token=${token}
       
       This Activationtoken is valid for 24 Hours.     
       `

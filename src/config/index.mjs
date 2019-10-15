@@ -10,6 +10,7 @@ if (!envFound) {
 export default {
 
     port: parseInt(process.env.PORT, 10),
+    baseURL: process.env.baseURL | 'http://localhost:3000',
     databaseURL: process.env.POSTGRESQL_URI,
     smtpURL: process.env.SMTP_URL,
 
@@ -28,6 +29,11 @@ export default {
     },
 
     optin: {
+        from: process.env.optin_from,
+        subject: process.env.optin_subject,
+    },
+
+    pwreset: {
         from: process.env.optin_from,
         subject: process.env.optin_subject,
     }

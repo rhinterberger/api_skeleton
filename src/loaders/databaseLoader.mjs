@@ -7,7 +7,6 @@ export default async () => {
     try {
         const db = await pg.Pool({connectionString: Config.databaseURL});
 
-
         const res = await db.query("select now()");
         Logger.debug(' Test Query "select now()": %s', res.rows[0])
         Logger.debug('Done DB connection!');
@@ -19,5 +18,3 @@ export default async () => {
         throw e;
     }
 }
-
-m

@@ -1,1 +1,1 @@
-select * from users where uuid = $1::text limit 1;
+select * from users where uuid = $1::uuid limit 1;

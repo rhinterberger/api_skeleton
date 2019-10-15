@@ -1,0 +1,1 @@
+delete from confirmations where conftype = $1::text and conftoken = $2::text;

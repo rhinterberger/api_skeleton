@@ -52,10 +52,36 @@ export default async () => {
 
     route.post('/resetpass',
         async (req, res, next) => {
-            const eventEmitter = di.Container.get('events');
             logger.debug('Calling /user/resetpass endpoint with body: %o', req.body);
 
-            eventEmitter.emit("sendPasswordReset");
+            const { uuid } = req.body;
+
+            try {
+                await userService.beginPwReset(uuid);
+                return res.json({'uuid':uuid}).status(200);
+            } catch (e) {
+                logger.error('🔥 error: %o',  e );
+
+                var err = new Error('ResetPassword Failed');
+                err['status'] = 401;
+                return next(err);
+            }
+        }
+    );
+
+    route.get('/confirmresetpass',
+        async (req, res, next) => {
+            logger.debug('Calling /user/confirmresetpass endpoint with query: %o', req.query);
+
+            try {
+                await userService.confirmPwReset(req.query.token);
+            } catch (e) {
+                var err = new Error(e);
+                err['status'] = 401;
+                return next(err);
+            }
+
+            return res.json({'confirmation': 'successful'}).status(200);
         }
     );
 

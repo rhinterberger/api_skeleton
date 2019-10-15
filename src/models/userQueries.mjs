@@ -10,7 +10,6 @@ export default class userQueries
 
     async queryUserByName(username)
     {
-
         const res = await this.db.query(this.queries.userGetByName,[username]);
         return res.rows;
     }
@@ -46,9 +45,10 @@ export default class userQueries
         await this.db.query(this.queries.newConfirmation,[type, uuid, token]);
     }
 
-    async queryConfirm(type,token,expire)
+    async queryConfirm(type, token, expire)
     {
         let res;
+
         switch (type)
         {
             case 'register':
@@ -64,11 +64,6 @@ export default class userQueries
         if (res.rowCount === 0)
             throw("Token invalid");
 
-        return true;
-    }
-
-    // TODO: remove me - just proxy method for refactor
-    async query(query, params = []) {
-        return this.db.query(query, params);
+        await this.db.query(this.queries.deleteConfirmation, [type, token]);
     }
 };
