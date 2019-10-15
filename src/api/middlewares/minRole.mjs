@@ -1,4 +1,3 @@
-import jwt from "express-jwt";
 import di from 'typedi';
 
 export default (req, res, next) => {

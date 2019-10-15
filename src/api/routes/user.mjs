@@ -1,4 +1,5 @@
 import Router from 'express-promise-router';
+import middleware from '../middlewares/index.mjs';
 import di from 'typedi';
 
 export default async () => {
@@ -82,6 +83,21 @@ export default async () => {
             }
 
             return res.json({'confirmation': 'successful'}).status(200);
+        }
+    );
+
+    route.get('/', middleware.isAuth,
+        async (req, res, next) => {
+            try {
+                if(await userService.minRole('customer'))
+                {
+                    return res.json({'confirmation': 'successful'}).status(200);
+                }
+            }
+            catch(e)
+            {
+                next(e);
+            }
         }
     );
 
