@@ -31,7 +31,7 @@ async function configureErrorHandling(app)
         next(err);
     });
 
-    /// error handlers
+    /// error userhandlers
     app.use((err, req, res, next) =>
     {
         if (err.name === 'UnauthorizedError') {

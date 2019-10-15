@@ -13,33 +13,22 @@ export default class UserService {
 
     async register(username, password)
     {
-        try {
-            const salt = await this.generateSalt();
-            const passHash = await this.generatePassHash(password, salt);
 
-            const userdata = {
-                "username": username,
-                "password": passHash,
-                "salt": salt
-            };
+        const salt = await this.generateSalt();
+        const passHash = await this.generatePassHash(password, salt);
 
-            try {
-                 var user = await this.User.create(userdata);
-            }
-            catch(e)
-            {
-                this.Logger.error("Register Failed 1: %s",e);
-            }
+        const userdata = {
+            "username": username,
+            "password": passHash,
+            "salt": salt
+        };
 
-            if(user) {
-                this.eventEmitter.emit("sendOptIn", user.username, await this.generateActivationToken('register',user.uuid));
-                this.Logger.info("User Created: " + user.uuid);
-                return user.uuid;
-            }
-        }
-        catch(e)
-        {
-            this.Logger.error("Register Failed 2: %s",e);
+        let user = await this.User.create(userdata);
+
+        if(user) {
+            this.eventEmitter.emit("sendOptIn", user.username, await this.generateActivationToken('register',user.uuid));
+            this.Logger.info("User Created: " + user.uuid);
+            return user.uuid;
         }
     }
 
@@ -66,7 +55,6 @@ export default class UserService {
     {
         await this.User.confirm(token,'resetpass');
     }
-
 
     async getUserByName(username)
     {

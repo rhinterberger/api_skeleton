@@ -31,8 +31,8 @@ export default class UserModel {
 
     async create(user)
     {
-            await this.db.queryCreateUser(user);
-            return this.getUserByName(user.username);
+        await this.db.queryCreateUser(user);
+        return this.getUserByName(user.username);
     }
 
     async setStatus(uid, status)

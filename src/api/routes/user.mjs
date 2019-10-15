@@ -1,5 +1,7 @@
 import Router from 'express-promise-router';
 import middleware from '../middlewares/index.mjs';
+import handlers from './userhandlers/index.mjs';
+
 import di from 'typedi';
 
 export default async () => {
@@ -8,32 +10,7 @@ export default async () => {
     const logger = di.Container.get('logger');
     const userService = di.Container.get('userService');
 
-    route.post('/register',
-        async (req, res, next) => {
-
-            logger.debug('Calling /user/register endpoint with body: %o', req.body);
-
-            let uuid;
-
-            try {
-                const {username, password } = req.body;
-                uuid = await userService.register(username,password);
-            } catch (e) {
-                logger.error('🔥 error: %o',  e );
-                return next(e);
-            }
-            if(uuid)
-                return res.json({'uuid':uuid}).status(200);
-
-            else
-            {
-                var err = new Error('Register Failed');
-                err['status'] = 401;
-                return next(err);
-            }
-
-        }
-    );
+    route.post('/register', await handlers.registerHandler);
 
     route.get('/confirmregister',
         async (req, res, next) => {
