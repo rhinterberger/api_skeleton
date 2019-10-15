@@ -1,13 +1,16 @@
-export default class dbService
+import di from 'typedi';
+
+export default class userQueries
 {
-    constructor(database, queries)
+    constructor(database)
     {
         this.db=database;
-        this.queries=queries;
+        this.queries=di.Container.get('queries');
     }
 
     async queryUserByName(username)
     {
+
         const res = await this.db.query(this.queries.userGetByName,[username]);
         return res.rows;
     }

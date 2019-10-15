@@ -1,8 +1,10 @@
+import Queries from './userQueries.mjs';
+
 export default class UserModel {
 
     constructor(database, config)
     {
-        this.db = database;
+        this.db = new Queries(database);
         this.config = config;
     }
 
@@ -29,9 +31,9 @@ export default class UserModel {
 
     async create(user)
     {
-        await this.db.queryCreateUser(user);
-        return this.getUserByName(user.username);
-    }
+            await this.db.queryCreateUser(user);
+            return this.getUserByName(user.username);
+     }
 
     async setStatus(uid, status)
     {
