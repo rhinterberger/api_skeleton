@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import routes from '../api/index.mjs';
 import config from '../config/index.mjs';
+import middleware from '../api/middlewares/index.mjs';
 
 async function configureRoutes(app)
 {
@@ -19,6 +20,8 @@ async function configureCommonRequestHandling(app)
     app.enable('trust proxy');
     app.use(cors());
     app.use(bodyParser.json());
+    // log all request params when not in production mode
+    app.use(middleware.debugLogger);
 }
 
 async function configureErrorHandling(app)

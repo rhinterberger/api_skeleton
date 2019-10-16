@@ -12,19 +12,15 @@ export default class AuthService {
 
     async login(username, password)
     {
-        try {
-            const user = await this.userService.getUserByName(username);
-            if(user !== undefined && user.status === 'active' && await this._checkPassword(password,user.password,user.salt))
-            {
-                await this.userService.updateLoginTime(user);
-                this.logger.info("Login: %s",user.username);
-                return await this._generateToken(user);
-            }
-        }
-        catch(e)
+        const user = await this.userService.getUserByName(username);
+        if(user !== undefined && user.status === 'active' && await this._checkPassword(password,user.password,user.salt))
         {
-            this.logger.error("Login Failed: %s %s",username,e);
+            await this.userService.updateLoginTime(user);
+            this.logger.info("Login: %s",user.username);
+            return await this._generateToken(user);
         }
+
+        throw('Login failed');
     }
 
     async _checkPassword(password,hash,salt)
