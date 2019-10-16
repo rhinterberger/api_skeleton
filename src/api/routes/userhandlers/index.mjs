@@ -1,5 +1,11 @@
-import registerHandler from './register.mjs';
+import register from './register.mjs';
+import confirmRegister from "./confirmRegister.mjs";
+import resetPass from "./resetPass.mjs";
+import confirmResetPass from "./confirmResetPass.mjs";
 
 export default {
-    registerHandler,
+    register,
+    confirmRegister,
+    resetPass,
+    confirmResetPass,
 };

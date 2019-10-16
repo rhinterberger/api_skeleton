@@ -89,4 +89,9 @@ export default class UserService {
         }
         return token;
     }
+
+    async minRole(role)
+    {
+
+    }
 };
