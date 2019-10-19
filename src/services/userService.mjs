@@ -129,11 +129,19 @@ export default class UserService {
 
     async updateUser(user)
     {
+        if(user.password) throw("Change Password not possible");
 
+        if(user.uuid === undefined || user.username === undefined || user.role === undefined || user.status === undefined)
+            throw("Missing data");
+
+        return await this.User.update(user);
     }
 
-    async deleteUser(user)
+    async deleteUser(uuid)
     {
+        if(uuid.length!=36)
+            throw("invalid UUID");
 
+        await this.User.delete(uuid);
     }
 };

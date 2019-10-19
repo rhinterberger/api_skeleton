@@ -38,6 +38,13 @@ export default class UserModel {
         return rows[0];
     }
 
+    async delete(uuid)
+    {
+        const rowCount=await this.db.queryDeleteUser(uuid);
+        if(rowCount == 0)
+            throw "Delete UUID not Found";
+    }
+
     // Todo: Remove. Change to update
     async updateLoginTime(uid)
     {

@@ -5,6 +5,7 @@ import confirmResetPass from "./confirmResetPass.mjs";
 import getAll from "./getAll.mjs";
 import readUser from "./readUser.mjs";
 import create from "./create.mjs";
+import deleteUser from "./delete.mjs";
 
 export default {
     register,
@@ -14,4 +15,5 @@ export default {
     getAll,
     readUser,
     create,
+    deleteUser,
 };

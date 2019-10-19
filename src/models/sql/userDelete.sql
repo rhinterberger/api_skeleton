@@ -1,0 +1,1 @@
+delete from users where uuid = $1::uuid;
