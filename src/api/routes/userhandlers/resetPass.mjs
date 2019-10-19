@@ -10,6 +10,6 @@ export default async (req, res, next) => {
     }
     catch(e)
     {
-        return next(await generateError(e,'ResetPassword failed'));
+        return next(await generateError(e,'ResetPassword failed', 200));
     }
 };

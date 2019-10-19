@@ -10,7 +10,7 @@ export default async (req, res, next) => {
     }
     catch (e)
     {
-        return next(await generateError(e,'List single users failed'));
+        return next(await generateError(e,'List single users failed', 200));
     }
 };
 

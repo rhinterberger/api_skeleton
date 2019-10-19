@@ -11,7 +11,7 @@ export default async (req, res, next) => {
     }
     catch (e)
     {
-        return next(await generateError(e,'Update user failed'));
+        return next(await generateError(e,'Update user failed', 200));
     }
 };
 

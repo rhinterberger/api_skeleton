@@ -10,7 +10,7 @@ export default async (req, res, next) => {
     }
     catch (e)
     {
-        return next(await generateError(e,'Register new user failed'));
+        return next(await generateError(e,'Register new user failed', 200));
     }
 };
 
