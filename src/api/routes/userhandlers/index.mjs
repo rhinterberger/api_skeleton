@@ -6,6 +6,7 @@ import getAll from "./getAll.mjs";
 import readUser from "./readUser.mjs";
 import create from "./create.mjs";
 import deleteUser from "./delete.mjs";
+import updateUser from "./update.mjs";
 
 export default {
     register,
@@ -15,5 +16,6 @@ export default {
     getAll,
     readUser,
     create,
+    updateUser,
     deleteUser,
 };

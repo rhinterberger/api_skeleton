@@ -38,6 +38,13 @@ export default class UserModel {
         return rows[0];
     }
 
+    async update(user)
+    {
+        const rowCount=await this.db.queryUpdateUser(user);
+        if(rowCount == 0)
+            throw "Update UUID not Found";
+    }
+
     async delete(uuid)
     {
         const rowCount=await this.db.queryDeleteUser(uuid);

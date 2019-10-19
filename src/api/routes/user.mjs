@@ -17,7 +17,7 @@ export default async () => {
     route.post('/', middleware.isAuth, await handlers.create);
 
     route.get('/:uuid', middleware.isAuth, await handlers.readUser);
-    //route.put('/:uuid', middleware.isAuth, await handlers.updateUser);
+    route.put('/:uuid', middleware.isAuth, await handlers.updateUser);
     route.delete('/:uuid', middleware.isAuth, await handlers.deleteUser);
 
 
