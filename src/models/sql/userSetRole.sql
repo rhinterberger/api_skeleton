@@ -1,1 +1,0 @@
-update users set role = $2 where id = $1;

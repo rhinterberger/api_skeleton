@@ -11,7 +11,7 @@ export default async () => {
     route.post('/resetpass', await handlers.resetPass);
     route.get('/confirmresetpass', await handlers.confirmResetPass);
 
-    route.get('/', middleware.isAuth);
+    route.get('/', middleware.isAuth, await handlers.getAll);
 
     return route;
 };

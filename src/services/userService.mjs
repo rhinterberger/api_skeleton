@@ -11,6 +11,7 @@ export default class UserService {
         this.User = new UserModel(di.Container.get("database"), di.Container.get("config"));
     }
 
+    // Todo: move to registrationService
     async register(username, password)
     {
 
@@ -26,23 +27,25 @@ export default class UserService {
         let user = await this.User.create(userdata);
 
         if(user) {
-            this.eventEmitter.emit("sendOptIn", user.username, await this.generateActivationToken('register',user.uuid));
+            this.eventEmitter.emit("sendOptIn", user.username, await this.generateConfirmationToken('register',user.uuid));
             this.Logger.info("User Created: " + user.uuid);
             return user.uuid;
         }
     }
 
+    // Todo: move to registrationService
     async confirmRegister(token)
     {
         await this.User.confirm(token,'register');
     }
 
+    // Todo: move to authService
     async beginPwReset(uuid)
     {
         try
         {
             let user=await this.User.getUserByUuid(uuid);
-            this.eventEmitter.emit("sendPasswordReset", user.username, await this.generateActivationToken('resetpass',user.uuid));
+            this.eventEmitter.emit("sendPasswordReset", user.username, await this.generateConfirmationToken('resetpass',user.uuid));
             this.Logger.info("Passwordreset sent: " + user.uuid);
 
         }
@@ -51,32 +54,33 @@ export default class UserService {
         }
     }
 
+    // Todo: move to authService
     async confirmPwReset(token)
     {
         await this.User.confirm(token,'resetpass');
     }
 
-    async getUserByName(username)
-    {
-        return await this.User.getUserByName(username);
-    }
-
-    async updateLoginTime(user)
-    {
-        await this.User.updateLoginTime(user.id);
-    }
-
+    // Todo: move to authService
     async generatePassHash(password,salt)
     {
         return crypto.scryptSync(password, salt, 64).toString('hex');
     }
 
+    // Todo: move to authService
     async generateSalt()
     {
         return crypto.randomBytes(32).toString('hex');
     }
 
-    async generateActivationToken(type,uuid)
+    // Todo: move to authService
+    async updateLoginTime(user)
+    {
+        // Todo: Change to userService.updateUser()
+        await this.User.updateLoginTime(user.id);
+    }
+
+    // Todo: move to confirmationService
+    async generateConfirmationToken(type, uuid)
     {
         const token=crypto.randomBytes(24).toString('hex');
         try{
@@ -90,7 +94,32 @@ export default class UserService {
         return token;
     }
 
-    async minRole(role)
+    async createUser(user)
+    {
+
+    }
+
+    async getAllUsers()
+    {
+        return await this.User.getAll();
+    }
+
+    async getUserByName(username)
+    {
+        return await this.User.getUserByName(username);
+    }
+
+    async getUserByUuid(uuid)
+    {
+        return await this.User.getUserByUuid(uuid);
+    }
+
+    async updateUser(user)
+    {
+
+    }
+
+    async deleteUser(user)
     {
 
     }

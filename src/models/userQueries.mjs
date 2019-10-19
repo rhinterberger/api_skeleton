@@ -8,6 +8,19 @@ export default class userQueries
         this.queries=di.Container.get('queries');
     }
 
+    async queryCreateUser(user)
+    {
+        await this.db.query(this.queries.userCreate,[user.username, user.password, user.salt]);
+    }
+
+
+    async queryAllUsers()
+    {
+        const res = await this.db.query(this.queries.userGetAll);
+        return res.rows;
+    }
+
+
     async queryUserByName(username)
     {
         const res = await this.db.query(this.queries.userGetByName,[username]);
@@ -25,26 +38,15 @@ export default class userQueries
         await this.db.query(this.queries.userUpdateLoginTime,[uid]);
     }
 
-    async queryCreateUser(user)
-    {
-        await this.db.query(this.queries.userCreate,[user.username, user.password, user.salt]);
-    }
 
-    async querySetStatus(uid,status)
-    {
-        await this.db.query(this.queries.userSetStatus,[uid,status]);
-    }
 
-    async querySetRole(uid,role)
-    {
-        await this.db.query(this.queries.userSetRole,[uid,status]);
-    }
-
+    // Todo: move to confirmationQueries
     async queryNewConfirmation(type, uuid, token)
     {
         await this.db.query(this.queries.newConfirmation,[type, uuid, token]);
     }
 
+    // Todo: move to confirmationQueries
     async queryConfirm(type, token, expire)
     {
         let res;

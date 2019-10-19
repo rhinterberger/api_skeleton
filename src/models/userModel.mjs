@@ -8,6 +8,20 @@ export default class UserModel {
         this.config = config;
     }
 
+    async create(user)
+    {
+        await this.db.queryCreateUser(user);
+        return this.getUserByName(user.username);
+    }
+
+    async getAll()
+    {
+        const rows = await this.db.queryAllUsers();
+        if(rows.length === 0)
+            throw "List all users failed";
+        return rows;
+    }
+
     async getUserByName(username)
     {
         const rows = await this.db.queryUserByName(username);
@@ -24,32 +38,19 @@ export default class UserModel {
         return rows[0];
     }
 
+    // Todo: Remove. Change to update
     async updateLoginTime(uid)
     {
         await this.db.queryUpdateLoginTime(uid);
     }
 
-    async create(user)
-    {
-        await this.db.queryCreateUser(user);
-        return this.getUserByName(user.username);
-    }
-
-    async setStatus(uid, status)
-    {
-        await this.db.querySetStatus(uid,status);
-    }
-
-    async setRole(uid, role)
-    {
-        await this.db.querySetRole(uid,role);
-    }
-
+    // Todo: move to ConfirmationModel
     async newConfirmation(type, uuid, token)
     {
         await this.db.queryNewConfirmation(type, uuid, token);
     }
 
+    // Todo: move to ConfirmationModel
     async confirm(token, type)
     {
         await this.db.queryConfirm(type, token, this.config.token.activationexpire);
