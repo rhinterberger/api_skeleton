@@ -5,6 +5,8 @@ export default async () => {
     const route = Router();
 
     route.post('/login',login);
+   // route.post('/changePass',handlers.setPassword);
+
 
     return route;
 };

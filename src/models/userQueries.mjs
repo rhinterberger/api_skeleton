@@ -10,7 +10,7 @@ export default class userQueries
 
     async queryCreateUser(user)
     {
-        await this.db.query(this.queries.userCreate,[user.username, user.password, user.salt]);
+        await this.db.query(this.queries.userCreate,[user.username, user.password, user.salt, user.status, user.role]);
     }
 
 

@@ -14,7 +14,7 @@ export default class UserService {
     // Todo: move to registrationService
     async register(username, password)
     {
-
+/*
         const salt = await this.generateSalt();
         const passHash = await this.generatePassHash(password, salt);
 
@@ -25,6 +25,8 @@ export default class UserService {
         };
 
         let user = await this.User.create(userdata);
+*/
+        let user = await this.createUser({'username': username, 'password': password});
 
         if(user) {
             this.eventEmitter.emit("sendOptIn", user.username, await this.generateConfirmationToken('register',user.uuid));
@@ -96,7 +98,18 @@ export default class UserService {
 
     async createUser(user)
     {
+        const salt = await this.generateSalt();
+        const passHash = await this.generatePassHash(user.password, salt);
 
+        const userdata = {
+            "username": user.username,
+            "password": passHash,
+            "salt": salt,
+            "role": user.role || 4,
+            "status": user.status || 'new',
+        };
+
+        return await this.User.create(userdata);
     }
 
     async getAllUsers()
