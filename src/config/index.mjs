@@ -10,7 +10,7 @@ if (!envFound) {
 export default {
 
     port: parseInt(process.env.PORT, 10),
-    baseURL: process.env.baseURL | 'http://localhost:3000',
+    baseURL: process.env.baseURL || 'http://localhost:3000',
     databaseURL: process.env.POSTGRESQL_URI,
     smtpURL: process.env.SMTP_URL,
 
