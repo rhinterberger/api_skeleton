@@ -61,8 +61,7 @@ export default class AuthService {
 
     async _updateLoginTime(user)
     {
-        // Todo: Change to userService.updateUser()
-        await this.User.updateLoginTime(user.id);
+        await this.userService.updateLoginTime(user);
     }
 
     async _checkPassword(password,user)

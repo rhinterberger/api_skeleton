@@ -45,6 +45,11 @@ export default class UserModel {
             throw "Update UUID not Found";
     }
 
+    async updateLoginTime(uid)
+    {
+        await this.db.queryUpdateLoginTime(uid);
+    }
+
     async delete(uuid)
     {
         const rowCount=await this.db.queryDeleteUser(uuid);

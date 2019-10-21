@@ -49,6 +49,11 @@ export default class UserService {
         return await this.User.updateUser(user);
     }
 
+    async updateLoginTime(user)
+    {
+        await this.User.updateLoginTime(user.id);
+    }
+
     async deleteUser(uuid)
     {
         if(uuid.length!==36)

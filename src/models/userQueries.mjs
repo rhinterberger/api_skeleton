@@ -42,4 +42,9 @@ export default class userQueries
         const res=await this.db.query(this.queries.userUpdate,[user.username, user.status, user.role, user.uuid]);
         return res.rowCount;
     }
+
+    async queryUpdateLoginTime(uid)
+    {
+        await this.db.query(this.queries.userUpdateLoginTime,[uid]);
+    }
 };
