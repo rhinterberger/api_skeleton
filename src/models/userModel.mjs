@@ -38,35 +38,17 @@ export default class UserModel {
         return rows[0];
     }
 
-    async update(user)
+    async updateUser(user)
     {
         const rowCount=await this.db.queryUpdateUser(user);
-        if(rowCount == 0)
+        if(rowCount === 0)
             throw "Update UUID not Found";
     }
 
     async delete(uuid)
     {
         const rowCount=await this.db.queryDeleteUser(uuid);
-        if(rowCount == 0)
+        if(rowCount === 0)
             throw "Delete UUID not Found";
-    }
-
-    // Todo: Remove. Change to update
-    async updateLoginTime(uid)
-    {
-        await this.db.queryUpdateLoginTime(uid);
-    }
-
-    // Todo: move to ConfirmationModel
-    async newConfirmation(type, uuid, token)
-    {
-        await this.db.queryNewConfirmation(type, uuid, token);
-    }
-
-    // Todo: move to ConfirmationModel
-    async confirm(token, type)
-    {
-        await this.db.queryConfirm(type, token, this.config.token.activationexpire);
     }
 };

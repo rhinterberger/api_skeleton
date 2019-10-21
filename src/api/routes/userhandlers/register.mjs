@@ -1,11 +1,11 @@
-import di from 'typedi';
 import generateError from '../../../util/generateError.mjs';
+import RegistrationService from "../../../services/registrationService.mjs";
 
-export default async (req, res, next) => {
-    const userService = di.Container.get('userService');
-
-    try {
-        const uuid = await userService.register(req.body.username,req.body.password);
+export default async (req, res, next) =>
+{
+    try
+    {
+        const uuid = await new RegistrationService().register(req.body.username,req.body.password);
         return res.json({'uuid':uuid}).status(200);
     }
     catch (e)

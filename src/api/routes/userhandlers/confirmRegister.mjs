@@ -1,11 +1,10 @@
-import di from 'typedi';
 import generateError from '../../../util/generateError.mjs';
+import RegistrationService from "../../../services/registrationService.mjs";
 
-export default async (req, res, next) => {
-    const userService = di.Container.get('userService');
-
+export default async (req, res, next) =>
+{
     try {
-        await userService.confirmRegister(req.query.token);
+        await new RegistrationService().confirmRegister(req.query.token);
         return res.json({'confirmation': 'successful'}).status(200);
     }
     catch (e)

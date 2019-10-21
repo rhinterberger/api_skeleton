@@ -50,8 +50,8 @@ export default class AuthService {
     {
         // Always generate new salt when setting new password
         const salt = crypto.randomBytes(32).toString('hex');
-        const passHash = this._generatePassHash(password, salt);
-        return { passHash, salt };
+        const passHash = await this._generatePassHash(password, salt);
+        return { passHash: passHash, salt: salt };
     }
 
     async _generatePassHash(password, salt)
