@@ -2,11 +2,11 @@ import di from 'typedi';
 import generateError from '../../../util/generateError.mjs';
 
 export default async (req, res, next) => {
-    const userService = di.Container.get('userService');
+    const authService = di.Container.get('authService');
 
     try {
-        await userService.confirmPwReset(req.query.token);
-        return res.json({'confirmation': 'successful'}).status(200);
+        const token = await authService.confirmPwReset(req.query.token);
+        return res.json({'jwt': token}).status(200);
     }
     catch (e)
     {

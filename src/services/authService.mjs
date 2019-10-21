@@ -1,7 +1,7 @@
 import di from 'typedi';
 import jwt from 'jsonwebtoken';
 import crypto from "crypto";
-import confirmationService from "./confirmationService.mjs";
+import ConfirmationService from "./confirmationService.mjs";
 
 export default class AuthService {
 
@@ -10,6 +10,7 @@ export default class AuthService {
         this.logger = di.Container.get('logger');
         this.config = di.Container.get('config');
         this.userService = di.Container.get('userService');
+        this.confirmationService = new ConfirmationService();
     }
 
     async login(username, password)
@@ -19,7 +20,7 @@ export default class AuthService {
         {
             await this._updateLoginTime(user);
             this.logger.info("Login: %s",user.username);
-            return await this._generateToken(user);
+            return await this._generateLoginToken(user);
         }
 
         throw('Login failed');
@@ -30,8 +31,8 @@ export default class AuthService {
         try
         {
             let user=await this.userService.getUserByUuid(uuid);
+            await this.confirmationService.sendPasswordReset(user);
 
-            new confirmationService().sendPasswordReset(user);
             this.logger.info("Passwordreset sent: " + user.uuid);
 
         }
@@ -42,8 +43,9 @@ export default class AuthService {
 
     async confirmPwReset(token)
     {
-        // TODO: move to confirmationService / Model
-        await this.User.confirm(token,'resetpass');
+        const uuid = await this.confirmationService.confirm(token,'resetpass');
+        const user = await this.userService.getUserByUuid(uuid);
+        return await this._generatePasswordToken(user);
     }
 
     async generatePassHashSalted(password)
@@ -72,12 +74,21 @@ export default class AuthService {
         throw "Password Mismatch";
     }
 
-    async _generateToken(user)
+    async _generateLoginToken(user)
     {
         return jwt.sign({
             'user': user.uuid,
-            'username': user.username,
             'role': user.role,
+        }, this.config.token.secret, { expiresIn: this.config.token.expire });
+    }
+
+    async _generatePasswordToken(user)
+    {
+        const confirmationToken = await this.confirmationService.generateConfirmationToken('dopassreset', user);
+
+        return jwt.sign({
+            'user': user.uuid,
+            'confirmation': confirmationToken,
         }, this.config.token.secret, { expiresIn: this.config.token.expire });
     }
 };

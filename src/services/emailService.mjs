@@ -32,13 +32,13 @@ export default class EmailService
         }
     }
 
-    async sendPasswordReset(to, token)
+    async sendPasswordResetMail(to, token)
     {
         try {
             const substitutions = {
                 token: token,
                 baseUrl: this.config.baseURL,
-                path: this.config.api.prefix + '/auth/confirmpassword',
+                path: this.config.api.prefix + '/auth/confirmresetpass',
             };
 
             const messagePlain = await this._loadTemplate('resetpassword.txt', substitutions);

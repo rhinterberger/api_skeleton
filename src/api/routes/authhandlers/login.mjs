@@ -6,7 +6,7 @@ export default async (req, res, next) => {
 
     try {
         const token = await authService.login(req.body.username, req.body.password);
-        return res.json(token).status(200);
+        return res.json({'jwt': token}).status(200);
     }
     catch(e)
     {
