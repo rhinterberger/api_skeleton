@@ -5,8 +5,8 @@ export default async (req, res, next) => {
     const authService = di.Container.get('authService');
 
     try {
-        await authService.beginPwReset(req.body.uuid);
-        return res.json({'beginresetpass': 'successful'}).status(200);
+        await authService.initResetPassword(req.body.uuid);
+        return res.json({'initResetPassword': 'successful'}).status(200);
     }
     catch(e)
     {

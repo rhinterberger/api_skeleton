@@ -1,7 +1,5 @@
 import register from './register.mjs';
 import confirmRegister from "./confirmRegister.mjs";
-import resetPass from "../authhandlers/resetPass.mjs";
-import confirmResetPass from "../authhandlers/confirmResetPass.mjs";
 import getAll from "./getAll.mjs";
 import readUser from "./readUser.mjs";
 import create from "./create.mjs";
@@ -11,8 +9,6 @@ import updateUser from "./update.mjs";
 export default {
     register,
     confirmRegister,
-    resetPass,
-    confirmResetPass,
     getAll,
     readUser,
     create,

@@ -26,7 +26,7 @@ export default class AuthService {
         throw('Login failed');
     }
 
-    async beginPwReset(uuid)
+    async initResetPassword(uuid)
     {
         try
         {
