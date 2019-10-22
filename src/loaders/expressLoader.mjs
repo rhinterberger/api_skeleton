@@ -17,6 +17,7 @@ async function configureRoutes(app)
 async function configureCommonRequestHandling(app)
 {
     // Common Configuration of request handling
+    app.set('case sensitive routing', true);
     app.enable('trust proxy');
     app.use(cors());
     app.use(bodyParser.json());
