@@ -20,9 +20,26 @@ export default class ConfirmationService {
         this.eventEmitter.emit("sendOptIn", user.username, await this.generateConfirmationToken('register',user));
     }
 
+    async isValid(token, type)
+    {
+        try {
+            return await this.confirmationModel.isValid(token, type);
+        }
+        catch(e)
+        {
+            this.logger.error("Validate confirmation Failed : %s",e);
+        }
+    }
+
     async confirm(token, type)
     {
-        return await this.confirmationModel.confirm(token,type);
+        try {
+            return await this.confirmationModel.confirm(token, type);
+        }
+        catch(e)
+        {
+            this.logger.error("Confirm confirmation Failed : %s",e);
+        }
     }
 
     async generateConfirmationToken(type, user)

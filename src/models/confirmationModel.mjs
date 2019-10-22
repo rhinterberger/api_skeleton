@@ -16,6 +16,11 @@ export default class ConfirmationModel {
         return token;
     }
 
+    async isValid(token, type)
+    {
+        return await this.db.queryIsValid(type, token, this.config.token.activationexpire);
+    }
+
     async confirm(token, type)
     {
         return await this.db.queryConfirm(type, token, this.config.token.activationexpire);

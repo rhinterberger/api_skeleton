@@ -10,6 +10,7 @@ export default class UserService {
 
     async createUser(user)
     {
+        // Todo: Add Validators for Password
         const AuthService = di.Container.get("authService");
         const { passHash, salt }  = await AuthService.generatePassHashSalted(user.password);
 
@@ -52,6 +53,12 @@ export default class UserService {
     async updateLoginTime(user)
     {
         await this.User.updateLoginTime(user.id);
+    }
+
+    async setPassword(user)
+    {
+        if(user.uuid === undefined || user.password === undefined || user.salt === undefined) throw("Change Password failed");
+        return await this.User.setPassword(user);
     }
 
     async deleteUser(uuid)

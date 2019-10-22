@@ -50,6 +50,11 @@ export default class UserModel {
         await this.db.queryUpdateLoginTime(uid);
     }
 
+    async setPassword(user)
+    {
+        await this.db.querySetPassword(user);
+    }
+
     async delete(uuid)
     {
         const rowCount=await this.db.queryDeleteUser(uuid);

@@ -30,15 +30,29 @@ export default class AuthService {
     {
         try
         {
-            let user=await this.userService.getUserByUuid(uuid);
+            const user=await this.userService.getUserByUuid(uuid);
             await this.confirmationService.sendPasswordReset(user);
 
-            this.logger.info("Passwordreset sent: " + user.uuid);
-
+            this.logger.info("PasswordReset sent: " + user.uuid);
         }
         catch (e) {
-            this.logger.info("Start Password-Reset failed: %o",e);
+            this.logger.info("Init PasswordReset failed: %o",e);
         }
+    }
+
+    async executeResetPassword(uuid, password, confirmation)
+    {
+        // Todo: Add Validators for Password
+        const { passHash, salt }  = await this.generatePassHashSalted(password);
+
+        const userdata = {
+            "uuid": uuid,
+            "password": passHash,
+            "salt": salt
+        };
+
+        await this.userService.setPassword(userdata);
+        await this.confirmationService.confirm(confirmation,'dopassreset');
     }
 
     async confirmPwReset(token)

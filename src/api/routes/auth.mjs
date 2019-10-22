@@ -1,12 +1,14 @@
 import Router from 'express-promise-router';
 import handlers from './authhandlers/index.mjs';
+import middlewares from '../middlewares/index.mjs';
 
 export default async () => {
     const route = Router();
 
     route.post('/login',handlers.login);
-    route.post('/initresetpass', await handlers.initResetPass);
-    route.get('/confirmresetpass', await handlers.confirmResetPass);
+    route.post('/initresetpass',  handlers.initResetPass);
+    route.get('/confirmresetpass', handlers.confirmResetPass);
+    route.post('/executeresetpass', middlewares.isAuth, middlewares.isPasswordReset, handlers.executeResetPass);
 
     return route;
 };

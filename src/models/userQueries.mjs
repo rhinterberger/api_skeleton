@@ -47,4 +47,9 @@ export default class userQueries
     {
         await this.db.query(this.queries.userUpdateLoginTime,[uid]);
     }
+
+    async querySetPassword(user)
+    {
+        await this.db.query(this.queries.userSetPassword,[user.password, user.salt, user.uuid]);
+    }
 };
