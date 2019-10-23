@@ -17,4 +17,9 @@ The routes() function is called by the express loader to add api routes for you 
 
 Module-local dependencies should be added to package.json in the module folder.
 
-All the rest is on you. Do whatever you want within your module.
+All the rest is on you. 
+
+API Path
+=
+Modules are connected to the path defined in [module].path.
+All Modulepaths reside under /module/ route.
