@@ -21,5 +21,5 @@ All the rest is on you.
 
 API Path
 =
-Modules are connected to the path defined in [module].path.
+Modules are connected to the path defined in modules.json
 All Modulepaths reside under /module/ route.

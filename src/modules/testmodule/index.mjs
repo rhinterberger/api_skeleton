@@ -6,7 +6,6 @@ export default class TestModule
 {
     constructor()
     {
-        this.path='/testmodule';
         this.db=di.Container.get('database');
         this.logger = di.Container.get('logger');
         this.logger.info("Init Module TestModule complete");

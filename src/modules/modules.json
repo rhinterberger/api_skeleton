@@ -1,5 +1,5 @@
 {
   "enabledModules": [
-    "./testmodule/index.mjs"
+    {"apipath" : "/testmodule","importpath": "./testmodule/index.mjs"}
   ]
 }

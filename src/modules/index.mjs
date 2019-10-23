@@ -12,8 +12,8 @@ export default class ModuleLoader
         const modules = await import('./modules.json');
         for (let apiModule of modules.default.enabledModules)
         {
-            let module = await import(apiModule);
-            this.modules.push(new module.default());
+            let module = await import(apiModule.importpath);
+            this.modules.push({apipath: apiModule.apipath, module: new module.default()});
         }
     }
 
@@ -23,7 +23,7 @@ export default class ModuleLoader
 
         for(let apiModule of this.modules)
         {
-            router.use(apiModule.path, await apiModule.routes());
+            router.use(apiModule.apipath, await apiModule.module.routes());
         }
         return router;
 
