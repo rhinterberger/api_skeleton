@@ -9,6 +9,7 @@ export default async () => {
     route.post('/initresetpass',  handlers.initResetPass);
     route.get('/confirmresetpass', handlers.confirmResetPass);
     route.post('/executeresetpass', middlewares.isAuth, middlewares.isPasswordReset, handlers.executeResetPass);
+    route.post('/refreshtoken', middlewares.isAuth, handlers.refreshToken);
 
     return route;
 };

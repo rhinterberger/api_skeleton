@@ -26,6 +26,17 @@ export default class AuthService {
         throw('Login failed');
     }
 
+    async refreshToken(uuid)
+    {
+        const user = await this.userService.getUserByUuid(uuid);
+        if(user !== undefined && user.status === 'active')
+        {
+            this.logger.info("RefreshToken: %s",user.username);
+            return await this.tokenService.generateLoginToken(user);
+        }
+        throw('RefreshToken failed');
+    }
+
     async initResetPassword(uuid)
     {
         try
