@@ -5,7 +5,7 @@ export default async (req, res, next) => {
     const authService = di.Container.get('authService');
 
     try {
-        const token = await authService.refreshToken(req.user.user);
+        const token = await authService.refreshToken(req.user.uuid);
         return res.json({'jwt': token}).status(200);
     }
     catch(e)

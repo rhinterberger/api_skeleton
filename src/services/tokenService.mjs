@@ -13,7 +13,7 @@ export default class TokenService
     async generateLoginToken(user)
     {
         return jwt.sign({
-            'user': user.uuid,
+            'uuid': user.uuid,
             'role': user.role,
         }, this.config.token.secret, { expiresIn: this.config.token.expire });
     }
@@ -23,7 +23,7 @@ export default class TokenService
         const confirmationToken = await this.confirmationService.generateConfirmationToken('dopassreset', user);
 
         return jwt.sign({
-            'user': user.uuid,
+            'uuid': user.uuid,
             'confirmation': confirmationToken,
         }, this.config.token.secret, { expiresIn: this.config.token.expire });
     }
