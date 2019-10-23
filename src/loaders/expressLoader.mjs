@@ -5,14 +5,16 @@ import routes from '../api/index.mjs';
 import config from '../config/index.mjs';
 import middleware from '../api/middlewares/index.mjs';
 
-async function configureRoutes(app)
+async function configureRoutes(app, modules)
 {
     // Application Routes
     app.get('/status', (req, res) => { res.status(200).end(); });
     app.head('/status', (req, res) => { res.status(200).end(); });
 
     app.use(config.api.prefix, await routes());
+    app.use(config.api.prefix+"/module/", await modules.routes());
 }
+
 
 async function configureCommonRequestHandling(app)
 {
@@ -58,11 +60,11 @@ async function configureErrorHandling(app)
     });
 }
 
-export default async (app) => {
+export default async (app, modules) => {
 
     try {
         await configureCommonRequestHandling(app);
-        await configureRoutes(app);
+        await configureRoutes(app, modules);
         // Keep as last line! Order of Routes is relevant and ErrorHandlers are Catch-All Routes
         await configureErrorHandling(app);
         Logger.debug('Done Express Application');

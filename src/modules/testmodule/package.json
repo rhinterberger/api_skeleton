@@ -1,0 +1,16 @@
+{
+  "name": "TestModule",
+  "version": "0.0.1",
+  "description": "MockUp Module Api Skeleton",
+  "type": "module",
+  "main": "index.mjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rhinterberger/api_skeleton.git"
+  },
+  "author": "Rainer Hinterberger",
+  "license": "MIT",
+  "dependencies": {
+    "moment": "^2.24.0"
+  }
+}
