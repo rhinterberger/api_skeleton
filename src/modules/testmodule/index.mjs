@@ -1,10 +1,11 @@
 import Router from 'express-promise-router';
 import di from 'typedi';
 import moment from "moment";
+import ModuleInterface from "../moduleinterface.mjs";
 
-export default class TestModule
+export default class TestModule extends ModuleInterface
 {
-    constructor()
+    async init()
     {
         this.db=di.Container.get('database');
         this.logger = di.Container.get('logger');

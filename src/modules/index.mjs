@@ -13,7 +13,10 @@ export default class ModuleLoader
         for (let apiModule of modules.default.enabledModules)
         {
             let module = await import(apiModule.importpath);
-            this.modules.push({apipath: apiModule.apipath, module: new module.default()});
+            let moduleInstance = new module.default();
+            await moduleInstance.init();
+            await moduleInstance.roles();
+            this.modules.push({apipath: apiModule.apipath, module: moduleInstance});
         }
     }
 
@@ -26,6 +29,5 @@ export default class ModuleLoader
             router.use(apiModule.apipath, await apiModule.module.routes());
         }
         return router;
-
     }
 }

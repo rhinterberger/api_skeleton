@@ -11,9 +11,11 @@ To enable a Module add its import path to modules.json
 
 Implementation
 =
-Every Modules has to implement a constructor() and a function routes().
-The constructor is used to initialize your module.
-The routes() function is called by the express loader to add api routes for you module
+Every Module has to extend ModuleInterface and implement a method init() and a method routes().
+The init() is used to initialize your module.
+The routes() is called by the express loader to add api routes for you module
+
+Also if there is a file called acl.json it will be loaded by MethodInterface and appended to global ACL for role-based authorization.
 
 Module-local dependencies should be added to package.json in the module folder.
 
