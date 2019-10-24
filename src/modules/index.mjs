@@ -16,6 +16,7 @@ export default class ModuleLoader
             let moduleInstance = new module.default();
             await moduleInstance.init();
             await moduleInstance.roles();
+
             this.modules.push({apipath: apiModule.apipath, module: moduleInstance});
         }
     }
