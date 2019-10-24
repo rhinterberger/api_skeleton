@@ -2,12 +2,12 @@ export default class ModuleInterface
 {
     async init()
     {
-        throw("Method init() not implemented");
+        throw(this.constructor.name + ": Method init() not implemented");
     }
 
     async routes()
     {
-        throw("Method routes not implemented");
+        throw(this.constructor.name + ":Method routes not implemented");
     }
 
     async roles()
