@@ -55,7 +55,7 @@ export default class EmailService
 
     async _loadTemplate(filename, substitutions)
     {
-        const data = fs.readFileSync('./src/config/templates/' + filename);
+        const data = fs.readFileSync('./src/modules/userauth/templates/' + filename);
         return mustache.render(data.toString('utf8'), substitutions)
     }
 

@@ -5,11 +5,11 @@ import fs from 'fs';
 export default async () => {
     var queries={};
 
-    let files = fs.readdirSync('./src/models/sql');
+    let files = fs.readdirSync('./src/modules/userauth/models/sql');
 
     for (let file of files)
     {
-        let data = fs.readFileSync('./src/models/sql/' + file);
+        let data = fs.readFileSync('./src/modules/userauth/models/sql/' + file);
         queries[file.split('.')[0]]=data.toString();
     }
 

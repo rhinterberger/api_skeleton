@@ -1,5 +1,5 @@
 import di from 'typedi';
-import generateError from '../../../util/generateError.mjs';
+import generateError from '../../../../../util/generateError.mjs';
 
 export default async (req, res, next) => {
     const authService = di.Container.get('authService');

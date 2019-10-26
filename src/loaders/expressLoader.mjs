@@ -1,9 +1,9 @@
 import Logger from './loggerLoader.mjs';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import routes from '../api/index.mjs';
+import di from 'typedi';
+
 import config from '../config/index.mjs';
-import middleware from '../api/middlewares/index.mjs';
 
 async function configureRoutes(app, modules)
 {
@@ -11,8 +11,7 @@ async function configureRoutes(app, modules)
     app.get('/status', (req, res) => { res.status(200).end(); });
     app.head('/status', (req, res) => { res.status(200).end(); });
 
-    app.use(config.api.prefix, await routes());
-    app.use(config.api.prefix+"/module/", await modules.routes());
+    app.use(config.api.prefix, await modules.routes());
 }
 
 
@@ -24,7 +23,7 @@ async function configureCommonRequestHandling(app)
     app.use(cors());
     app.use(bodyParser.json());
     // log all request params when not in production mode
-    app.use(middleware.debugLogger);
+    app.use(di.Container.get('middleware').debugLogger);
 }
 
 async function configureErrorHandling(app)

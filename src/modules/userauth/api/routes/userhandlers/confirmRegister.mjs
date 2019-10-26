@@ -1,4 +1,4 @@
-import generateError from '../../../util/generateError.mjs';
+import generateError from '../../../../../util/generateError.mjs';
 import RegistrationService from "../../../services/registrationService.mjs";
 
 export default async (req, res, next) =>

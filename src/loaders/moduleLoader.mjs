@@ -9,10 +9,10 @@ export default class ModuleLoader
 
     async init()
     {
-        const modules = await import('./modules.json');
+        const modules = await import('../modules/modules.json');
         for (let apiModule of modules.default.enabledModules)
         {
-            let module = await import(apiModule.importpath);
+            let module = await import('../'+apiModule.importpath);
             let moduleInstance = new module.default();
             await moduleInstance.init();
             await moduleInstance.roles();

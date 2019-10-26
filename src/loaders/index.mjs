@@ -1,7 +1,7 @@
 import dependencyInjectorLoader from './dependecyInjectorLoader.mjs'
 import expressLoader from './expressLoader.mjs';
 import databaseLoader from './databaseLoader.mjs';
-import ModuleLoader from '../modules/index.mjs';
+import ModuleLoader from './moduleLoader.mjs';
 import Logger from './loggerLoader.mjs';
 
 export default async (app) => {
