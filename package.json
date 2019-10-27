@@ -15,9 +15,6 @@
   "author": "Rainer Hinterberger",
   "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "cookie-parser": "^1.4.3",
-    "cors": "^2.8.5",
     "dotenv": "^1",
     "express": "^4.16.4",
     "express-jwt": "^5.3.1",
@@ -25,9 +22,6 @@
     "express-promise-router": "^3.0.3",
     "express-session": "^1.15.6",
     "helmet": "^3.21.2",
-    "jsonwebtoken": "^8.4.0",
-    "mustache": "^3.1.0",
-    "nodemailer": "^5.1.1",
     "pg": "^7.12.1",
     "typedi": "^0.8.0",
     "winston": "^3"

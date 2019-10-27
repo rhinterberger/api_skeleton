@@ -1,5 +1,5 @@
 import Logger from './loggerLoader.mjs';
-import bodyParser from 'body-parser';
+import express from 'express';
 import di from 'typedi';
 
 import config from '../config/index.mjs';
@@ -17,13 +17,15 @@ async function configureRoutes(app, modules)
 async function configureCommonRequestHandling(app)
 {
     // Common Configuration of request handling
-    app.set('caseSensitive', true);
-    app.use(bodyParser.json());
+    app.set('case sensitive routing', true);
+    app.set('trust proxy', true);
+    app.use(express.json());
     // log all request params when not in production mode
     app.use(di.Container.get('middleware').debugLogger);
 }
 
 async function configureErrorHandling(app)
+
 {
     /// catch 404 and forward to error handler
     app.use((req, res, next) =>
