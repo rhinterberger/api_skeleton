@@ -1,6 +1,5 @@
 import Logger from './loggerLoader.mjs';
 import bodyParser from 'body-parser';
-import cors from 'cors';
 import di from 'typedi';
 
 import config from '../config/index.mjs';
@@ -18,9 +17,7 @@ async function configureRoutes(app, modules)
 async function configureCommonRequestHandling(app)
 {
     // Common Configuration of request handling
-    app.set('case sensitive routing', true);
-    app.enable('trust proxy');
-    app.use(cors());
+    app.set('caseSensitive', true);
     app.use(bodyParser.json());
     // log all request params when not in production mode
     app.use(di.Container.get('middleware').debugLogger);
