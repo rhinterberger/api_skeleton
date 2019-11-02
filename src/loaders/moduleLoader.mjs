@@ -17,13 +17,13 @@ export default class ModuleLoader
         }
     }
 
-    async routes()
+    async routes(options)
     {
-        const router = Router();
+        const router = Router(options);
 
         for(let apiModule of this.modules)
         {
-            router.use(apiModule.apipath, await apiModule.module.routes());
+            router.use(apiModule.apipath, await apiModule.module.routes(options));
         }
         return router;
     }

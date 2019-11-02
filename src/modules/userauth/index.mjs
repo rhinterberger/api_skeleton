@@ -26,14 +26,15 @@ export default class UserAuthModule extends ModuleInterface
         this.logger.info("Init Module UserAuthModule complete");
     }
 
-    async routes()
+    async routes(options)
     {
-        const router = Router();
+        const router = Router(options);
 
+        console.log(options);
         let middleware = di.Container.get('middleware');
         middleware.auth = middlewares;
-        router.use('/auth', await authRoutes());
-        router.use('/user', await userRoutes());
+        router.use('/auth', await authRoutes(options));
+        router.use('/user', await userRoutes(options));
 
         this.logger.info("Init Routes UserAuthModule complete");
         return router;

@@ -2,8 +2,8 @@ import Router from 'express-promise-router';
 import di from "typedi";
 import handlers from './userhandlers/index.mjs';
 
-export default async () => {
-    const route = Router();
+export default async (options) => {
+    const route = Router(options);
 
     const mw = di.Container.get("middleware");
     route.post('/register', await handlers.register);
@@ -13,7 +13,7 @@ export default async () => {
     route.post('/', await mw.auth.isAuth, await handlers.create);
 
     route.get('/:uuid', await mw.auth.isAuth, await handlers.readUser);
-    route.put('/:uuid', await mw.auth.isAuth, await handlers.updateUser);
+    route.post('/:uuid', await mw.auth.isAuth, await handlers.updateUser);
     route.delete('/:uuid', await mw.auth.isAuth, await handlers.deleteUser);
 
     return route;

@@ -2,8 +2,8 @@ import Router from 'express-promise-router';
 import di from "typedi";
 import handlers from './authhandlers/index.mjs';
 
-export default async () => {
-    const route = Router();
+export default async (options) => {
+    const route = Router(options);
     const mw = di.Container.get("middleware");
 
     route.post('/login',handlers.login);

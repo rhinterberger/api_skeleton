@@ -10,15 +10,15 @@ async function configureRoutes(app, modules)
     app.get('/status', (req, res) => { res.status(200).end(); });
     app.head('/status', (req, res) => { res.status(200).end(); });
 
-    app.use(config.api.prefix, await modules.routes());
+    app.use(config.api.prefix, await modules.routes({"caseSensitive": true}));
 }
 
 
 async function configureCommonRequestHandling(app)
 {
     // Common Configuration of request handling
-    app.set('case sensitive routing', true);
-    app.set('trust proxy', true);
+    app.enable('case sensitive routing');
+    app.enable('trust proxy');
     app.use(express.json());
     // log all request params when not in production mode
     app.use(di.Container.get('middleware').debugLogger);

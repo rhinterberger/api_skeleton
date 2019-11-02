@@ -1,5 +1,8 @@
 [
   { "role" : "userreader",  "method" : ["GET"], "path": "user/:uuid" },
-  { "role" : "dnscreator", "method" : ["GET","POST"], "path": "/dns/" },
-  { "role" : "dnswriter", "method" : ["PUT", "DELETE"], "path": "/dns/*" }
+  { "role" : "userwriter",  "method" : ["POST"], "path": "user/:uuid" },
+  { "role" : "useradmin", "method" : ["GET","POST"], "path": "user" },
+  { "role" : "useradmin", "method" : ["DELETE"], "path": "user/:uuid" },
+  { "role" : "default", "method" : ["POST"], "path": "auth/executeresetpass" },
+  { "role" : "default", "method" : ["POST"], "path": "auth/refreshtoken" }
 ]
