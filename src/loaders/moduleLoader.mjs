@@ -12,11 +12,7 @@ export default class ModuleLoader
         const modules = await import('../modules/modules.json');
         for (let apiModule of modules.default.enabledModules)
         {
-            let module = await import('../'+apiModule.importpath);
-            let moduleInstance = new module.default();
-            await moduleInstance.init();
-            await moduleInstance.roles();
-
+           let moduleInstance = await this._initModule(apiModule);
             this.modules.push({apipath: apiModule.apipath, module: moduleInstance});
         }
     }
@@ -31,4 +27,15 @@ export default class ModuleLoader
         }
         return router;
     }
+
+    async _initModule(apiModule)
+    {
+        let module = await import('../'+apiModule.importpath);
+        let moduleInstance = new module.default();
+        await moduleInstance.init();
+        await moduleInstance.roles();
+
+        return moduleInstance;
+    }
+
 }

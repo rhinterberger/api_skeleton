@@ -1,0 +1,4 @@
+[
+  { "role" : "blobla",  "method" : ["GET"], "path": "/testmodule/:uuid" },
+  { "role" : "blalor", "method" : ["GET","POST"], "path": "/testmodul/" }
+]

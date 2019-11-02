@@ -1,0 +1,5 @@
+[
+  { "role" : "userreader",  "method" : ["GET"], "path": "user/:uuid" },
+  { "role" : "dnscreator", "method" : ["GET","POST"], "path": "/dns/" },
+  { "role" : "dnswriter", "method" : ["PUT", "DELETE"], "path": "/dns/*" }
+]

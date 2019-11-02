@@ -1,1 +1,1 @@
-select uuid, username, status, role, create_date, login_date from users;
+select uuid, username, status, create_date, login_date from users;

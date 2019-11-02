@@ -9,6 +9,7 @@ import UserService from "./services/userService.mjs";
 import AuthService from "./services/authService.mjs";
 import queryLoader from "./loaders/sqlqueryloader.mjs";
 import Subscribers from "./subscribers/index.mjs";
+import AclService from "./services/aclService.mjs";
 
 export default class UserAuthModule extends ModuleInterface
 {
@@ -21,6 +22,7 @@ export default class UserAuthModule extends ModuleInterface
         di.Container.set('events',new Subscribers());
         di.Container.set('userService',new UserService());
         di.Container.set('authService',new AuthService());
+        di.Container.set('aclService', new AclService());
         this.logger.info("Init Module UserAuthModule complete");
     }
 
@@ -29,11 +31,18 @@ export default class UserAuthModule extends ModuleInterface
         const router = Router();
 
         let middleware = di.Container.get('middleware');
-        middleware.userAuth = middlewares;
+        middleware.auth = middlewares;
         router.use('/auth', await authRoutes());
         router.use('/user', await userRoutes());
 
         this.logger.info("Init Routes UserAuthModule complete");
         return router;
+    }
+
+    async roles()
+    {
+        // Cant get correct path in superclass directly.
+        // Don't like it this way ...
+        super.roles(await import("./acl.json"));
     }
 }

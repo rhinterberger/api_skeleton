@@ -20,4 +20,9 @@ export default class TestModule extends ModuleInterface
         this.logger.info("Init Routes TestModule complete");
         return router;
     }
+
+    async roles()
+    {
+        super.roles(await import("./acl.json"));
+    }
 }

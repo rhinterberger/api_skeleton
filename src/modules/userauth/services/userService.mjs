@@ -32,12 +32,16 @@ export default class UserService {
 
     async getUserByName(username)
     {
-        return await this.User.getUserByName(username);
+        let user = await this.User.getUserByName(username);
+        user.roles = await this.User.getRoles(user.uuid);
+        return user;
     }
 
     async getUserByUuid(uuid)
     {
-        return await this.User.getUserByUuid(uuid);
+        let user = await this.User.getUserByUuid(uuid);
+        user.roles = await this.User.getRoles(uuid);
+        return user;
     }
 
     async updateUser(user)

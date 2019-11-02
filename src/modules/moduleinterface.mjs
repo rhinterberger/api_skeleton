@@ -1,3 +1,5 @@
+import di from 'typedi';
+
 export default class ModuleInterface
 {
     async init()
@@ -10,8 +12,17 @@ export default class ModuleInterface
         throw(this.constructor.name + ":Method routes not implemented");
     }
 
-    async roles()
+    async roles(acl)
     {
-        // TODO: Load acl.json and append to global acl
+        try
+        {
+            const aclService = di.Container.get('aclService');
+            aclService.append(acl);
+        }
+        catch(e)
+        {
+            const logger = di.Container.get('logger');
+            logger.error("AclService unavailable");
+        }
     }
 }

@@ -61,4 +61,15 @@ export default class UserModel {
         if(rowCount === 0)
             throw "Delete UUID not Found";
     }
+
+    async getRoles(uuid)
+    {
+        const rows = await this.db.queryGetRoles(uuid);
+        let roles = [];
+        for(let row of rows)
+        {
+            roles = roles.concat(row.roles);
+        }
+        return roles;
+    }
 };

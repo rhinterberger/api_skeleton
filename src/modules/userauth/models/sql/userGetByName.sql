@@ -1,1 +1,1 @@
-select * from users where username = $1::text limit 1;
+select uuid, username, status, create_date, login_date from users where username = $1::text limit 1;
