@@ -9,10 +9,10 @@ export default async () => {
     route.post('/register', await handlers.register);
     route.get('/confirmregister', await handlers.confirmRegister);
 
-    route.get('/', await mw.auth.isAuth, await mw.auth.checkAcl, await handlers.getAll);
+    route.get('/', await mw.auth.isAuth, await handlers.getAll);
     route.post('/', await mw.auth.isAuth, await handlers.create);
 
-    route.get('/:uuid', await mw.auth.isAuth, await mw.auth.checkAcl, await handlers.readUser);
+    route.get('/:uuid', await mw.auth.isAuth, await handlers.readUser);
     route.put('/:uuid', await mw.auth.isAuth, await handlers.updateUser);
     route.delete('/:uuid', await mw.auth.isAuth, await handlers.deleteUser);
 
