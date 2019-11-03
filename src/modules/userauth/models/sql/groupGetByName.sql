@@ -1,0 +1,1 @@
+select * from groups where name = $1::text limit 1;

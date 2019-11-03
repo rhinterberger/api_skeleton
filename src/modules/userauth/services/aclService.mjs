@@ -2,7 +2,6 @@ import di from "typedi";
 
 export default class AclService
 {
-
     constructor()
     {
         this.acls = {};
@@ -24,5 +23,16 @@ export default class AclService
     async checkAcl(method, path, user)
     {
         return user.roles.indexOf(this.acls[method][path]) !== -1;
+    }
+
+    async availableRoles()
+    {
+        let roles = [];
+        for(let method in this.acls)
+            for (let path in this.acls[method])
+                if(roles.indexOf(this.acls[method][path]) === -1)
+                    roles.push(this.acls[method][path]);
+
+        return roles;
     }
 }

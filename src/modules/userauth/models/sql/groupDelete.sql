@@ -1,0 +1,1 @@
+delete from groups where uuid = $1::uuid;

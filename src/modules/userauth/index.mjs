@@ -2,14 +2,16 @@ import Router from 'express-promise-router';
 import di from 'typedi';
 import ModuleInterface from "../moduleinterface.mjs";
 
+import queryLoader from "./loaders/sqlqueryloader.mjs";
+import Subscribers from "./subscribers/index.mjs";
 import authRoutes from './api/routes/auth.mjs';
 import userRoutes from './api/routes/user.mjs';
+import groupRoutes from './api/routes/group.mjs';
 import middlewares from './api/middlewares/index.mjs';
 import UserService from "./services/userService.mjs";
 import AuthService from "./services/authService.mjs";
-import queryLoader from "./loaders/sqlqueryloader.mjs";
-import Subscribers from "./subscribers/index.mjs";
 import AclService from "./services/aclService.mjs";
+import GroupService from "./services/groupService.mjs";
 
 export default class UserAuthModule extends ModuleInterface
 {
@@ -23,6 +25,7 @@ export default class UserAuthModule extends ModuleInterface
         di.Container.set('userService',new UserService());
         di.Container.set('authService',new AuthService());
         di.Container.set('aclService', new AclService());
+        di.Container.set('groupService', new GroupService());
         this.logger.info("Init Module UserAuthModule complete");
     }
 
@@ -35,6 +38,7 @@ export default class UserAuthModule extends ModuleInterface
         middleware.auth = middlewares;
         router.use('/auth', await authRoutes(options));
         router.use('/user', await userRoutes(options));
+        router.use('/group', await groupRoutes(options));
 
         this.logger.info("Init Routes UserAuthModule complete");
         return router;

@@ -1,8 +1,12 @@
 [
   { "role" : "userreader",  "method" : ["GET"], "path": "user/:uuid" },
   { "role" : "userwriter",  "method" : ["POST"], "path": "user/:uuid" },
-  { "role" : "useradmin", "method" : ["GET","POST"], "path": "user" },
+  { "role" : "useradmin", "method" : ["GET","POST"], "path": "user/" },
   { "role" : "useradmin", "method" : ["DELETE"], "path": "user/:uuid" },
   { "role" : "default", "method" : ["POST"], "path": "auth/executeresetpass" },
-  { "role" : "default", "method" : ["POST"], "path": "auth/refreshtoken" }
+  { "role" : "default", "method" : ["POST"], "path": "auth/refreshtoken" },
+  { "role" : "groupadmin", "method" : ["GET","POST", "DELETE"], "path": "group/:uuid" },
+  { "role" : "groupadmin", "method" : ["GET","POST"], "path": "group/" },
+  { "role" : "groupadmin", "method" : ["GET"], "path": "group/roles" },
+  { "role" : "groupadmin", "method" : ["GET"], "path": "group/user/:uuid" }
 ]

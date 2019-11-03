@@ -1,0 +1,1 @@
+select * from groups where uuid = $1::uuid limit 1;
