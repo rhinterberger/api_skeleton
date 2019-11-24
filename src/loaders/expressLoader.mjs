@@ -1,6 +1,7 @@
 import Logger from './loggerLoader.mjs';
 import express from 'express';
 import di from 'typedi';
+import cors from 'cors';
 
 import config from '../config/index.mjs';
 
@@ -20,6 +21,7 @@ async function configureCommonRequestHandling(app)
     app.enable('case sensitive routing');
     app.enable('trust proxy');
     app.use(express.json());
+    app.use(cors());
     // log all request params when not in production mode
     app.use(di.Container.get('middleware').debugLogger);
 }

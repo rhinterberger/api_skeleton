@@ -15,6 +15,7 @@
   "author": "Rainer Hinterberger",
   "license": "MIT",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^1",
     "express": "^4.16.4",
     "express-jwt": "^5.3.1",
