@@ -26,6 +26,11 @@ export default class AuthService {
         throw('Login failed');
     }
 
+    async getPubKey()
+    {
+        return this.config.token.pubkey;
+    }
+
     async refreshToken(uuid)
     {
         const user = await this.userService.getUserByUuid(uuid);

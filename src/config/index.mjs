@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import fs from "fs";
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -6,6 +7,9 @@ const envFound = dotenv.config();
 if (!envFound) {
     throw new Error("⚠️  Couldn't find .env file  ⚠️");
 }
+
+const pubkey = fs.readFileSync(process.env.token_keypub);
+const privkey = fs.readFileSync(process.env.token_key);
 
 export default {
 
@@ -17,7 +21,10 @@ export default {
     token : {
         secret: process.env.TOKEN_SECRET,
         expire: process.env.TOKEN_EXPIRE || '600s',
-        activationexpire: process.env.ACTIVATION_EXPIRE || '86400'
+        activationexpire: process.env.ACTIVATION_EXPIRE || '86400',
+        privkey : privkey.toString(),
+        pubkey: pubkey.toString(),
+        algorithm: process.env.token_algorithm,
     },
 
     logs: {

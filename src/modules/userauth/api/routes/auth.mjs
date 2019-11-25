@@ -6,6 +6,7 @@ export default async (options) => {
     const route = Router(options);
     const mw = di.Container.get("middleware");
 
+    route.get('/key', handlers.getKey);
     route.post('/login',handlers.login);
     route.post('/initresetpass',  handlers.initResetPass);
     route.get('/confirmresetpass', handlers.confirmResetPass);

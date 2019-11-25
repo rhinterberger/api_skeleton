@@ -27,7 +27,7 @@ export default async (req, res, next) => {
     const config = di.Container.get('config');
     try
     {
-        req.user = jwt.verify(getToken(), config.token.secret);
+        req.user = jwt.verify(getToken(),config.token.privkey, {algorithm: congfig.token.algorithm});
         if(await checkAcl()) next();
     }
     catch(e)
