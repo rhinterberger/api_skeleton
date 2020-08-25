@@ -5,8 +5,8 @@
   "type": "module",
   "main": "src/app.js",
   "scripts": {
-    "start": "node --experimental-modules",
-    "devstart": "nodemon --experimental-modules"
+    "start": "node --experimental-modules  --experimental-json-modules",
+    "devstart": "nodemon --experimental-modules  --experimental-json-modules"
   },
   "repository": {
     "type": "git",
@@ -18,14 +18,15 @@
     "cors": "^2.8.5",
     "dotenv": "^1",
     "express": "^4.16.4",
-    "express-jwt": "^5.3.1",
-    "express-jwt-permissions": "^1.2.3",
+    "express-jwt": "^5.3.3",
+    "express-jwt-permissions": "^1.3.3",
     "express-promise-router": "^3.0.3",
-    "express-session": "^1.15.6",
-    "helmet": "^3.21.2",
-    "pg": "^7.12.1",
+    "express-session": "^1.17.1",
+    "helmet": "^3.23.3",
+    "pg": "^7.18.2",
     "typedi": "^0.8.0",
-    "winston": "^3"
+    "winston": "^3.3.3",
+    "authmodule": "file:./src/modules/userauth"
   },
   "devDependencies": {
     "nodemon": "^1.19.4"

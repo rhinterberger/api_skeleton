@@ -1,7 +1,7 @@
 Small node.js Api Skeleton with basic authentication and user registration.
 Uses Postgresql.
 
-Uses ES6 Modules, add --experimental-modules to package.json
+Uses ES6 Modules, add --experimental-modules and --experimental-json-modules to package.json
 
 Folders:
 
