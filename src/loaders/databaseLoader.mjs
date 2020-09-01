@@ -5,7 +5,7 @@ import Logger from "./loggerLoader.mjs";
 export default async () => {
 
     try {
-        const db = await pg.Pool({connectionString: Config.databaseURL});
+        const db = await new pg.Pool({connectionString: Config.databaseURL});
 
         const res = await db.query("select now()");
         Logger.debug(' Test Query "select now()": %s', res.rows[0])

@@ -11,6 +11,6 @@
   "author": "Rainer Hinterberger",
   "license": "MIT",
   "dependencies": {
-    "moment": "^2.24.0"
+    "moment": "latest"
   }
 }
