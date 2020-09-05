@@ -11,8 +11,8 @@
   "author": "Rainer Hinterberger",
   "license": "MIT",
   "dependencies": {
-    "jsonwebtoken": "^8.4.0",
-    "mustache": "^3.2.1",
-    "nodemailer": "^5.1.1"
+    "jsonwebtoken": "latest",
+    "mustache": "latest",
+    "nodemailer": "latest"
   }
 }
