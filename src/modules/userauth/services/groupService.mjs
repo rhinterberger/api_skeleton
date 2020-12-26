@@ -1,11 +1,11 @@
-import di from 'typedi';
+import Services from '../../../core/common/serviceRegistry.mjs'
 import GroupModel from '../models/groupModel.mjs';
 
 export default class GroupService {
 
     constructor()
     {
-        this.group = new GroupModel(di.Container.get("database"), di.Container.get("config"));
+        this.group = new GroupModel(Services.get("database"), Services.get("config"));
     }
 
     async createGroup(group)

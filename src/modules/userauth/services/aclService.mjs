@@ -1,13 +1,13 @@
-import di from "typedi";
+import Services from '../../../core/common/serviceRegistry.mjs'
 
 export default class AclService
 {
     constructor()
     {
         this.acls = {};
-        this.logger = di.Container.get('logger');
-        this.config = di.Container.get('config');
-        this.userService = di.Container.get('userService');
+        this.logger = Services.get('logger');
+        this.config = Services.get('config');
+        this.userService = Services.get('userService');
     }
 
     async append(acl)

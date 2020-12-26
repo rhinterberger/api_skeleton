@@ -1,11 +1,11 @@
-import di from 'typedi';
+import Services from '../../../core/common/serviceRegistry.mjs'
 import UserModel from '../models/userModel.mjs';
 
 export default class UserService {
 
     constructor()
     {
-        this.User = new UserModel(di.Container.get("database"), di.Container.get("config"));
+        this.User = new UserModel(Services.get("database"), Services.get("config"));
     }
 
     async createUser(user)

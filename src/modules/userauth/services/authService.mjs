@@ -1,4 +1,4 @@
-import di from 'typedi';
+import Services from '../../../core/common/serviceRegistry.mjs'
 import crypto from "crypto";
 import ConfirmationService from "./confirmationService.mjs";
 import TokenService from "./tokenService.mjs";
@@ -7,9 +7,9 @@ export default class AuthService {
 
     constructor()
     {
-        this.logger = di.Container.get('logger');
-        this.config = di.Container.get('config');
-        this.userService = di.Container.get('userService');
+        this.logger = Services.get('logger');
+        this.config = Services.get('config');
+        this.userService = Services.get('userService');
         this.confirmationService = new ConfirmationService();
         this.tokenService = new TokenService();
     }

@@ -1,35 +1,29 @@
-import Logger from './loggerLoader.mjs';
 import express from 'express';
-import di from 'typedi';
 import cors from 'cors';
 
-import config from '../config/index.mjs';
+import Services from "../common/serviceRegistry.mjs";
 
 async function configureRoutes(app, modules)
 {
-    // Application Routes
+    let config = Services.get('config');
+
     app.get('/status', (req, res) => { res.status(200).end(); });
     app.head('/status', (req, res) => { res.status(200).end(); });
 
     app.use(config.api.prefix, await modules.routes({"caseSensitive": true}));
 }
 
-
 async function configureCommonRequestHandling(app)
 {
-    // Common Configuration of request handling
     app.enable('case sensitive routing');
     app.enable('trust proxy');
     app.use(express.json());
     app.use(cors());
-    // log all request params when not in production mode
-    app.use(di.Container.get('middleware').debugLogger);
+    app.use(Services.get('middleware').debugLogger);
 }
 
 async function configureErrorHandling(app)
-
 {
-    /// catch 404 and forward to error handler
     app.use((req, res, next) =>
     {
         const err = new Error('Not Found');
@@ -37,7 +31,6 @@ async function configureErrorHandling(app)
         next(err);
     });
 
-    /// error userhandlers
     app.use((err, req, res, next) =>
     {
         if (err.name === 'UnauthorizedError') {
@@ -62,15 +55,17 @@ async function configureErrorHandling(app)
 
 export default async (app, modules) => {
 
+    let log = Services.get("logger");
     try {
         await configureCommonRequestHandling(app);
         await configureRoutes(app, modules);
+
         // Keep as last line! Order of Routes is relevant and ErrorHandlers are Catch-All Routes
         await configureErrorHandling(app);
-        Logger.debug('Done Express Application');
+        log.debug('Done Express Application');
     }
     catch(e) {
-        Logger.error('FAILED Express Application')
+        log.error('FAILED Express Application')
         throw(e);
     }
 };

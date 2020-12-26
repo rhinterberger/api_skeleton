@@ -1,4 +1,4 @@
-import di from 'typedi';
+import Services from '../../core/common/serviceRegistry.mjs'
 
 export default class ModuleInterface
 {
@@ -16,12 +16,12 @@ export default class ModuleInterface
     {
         try
         {
-            const aclService = di.Container.get('aclService');
+            const aclService = Services.get('aclService');
             aclService.append(acl);
         }
         catch(e)
         {
-            const logger = di.Container.get('logger');
+            const logger = Services.get('logger');
             logger.error("AclService unavailable");
         }
     }

@@ -1,11 +1,11 @@
 import Router from 'express-promise-router';
-import di from "typedi";
+import Services from '../../../../core/common/serviceRegistry.mjs'
 import handlers from './grouphandlers/index.mjs';
 
 export default async (options) => {
     const route = Router(options);
 
-    const mw = di.Container.get("middleware");
+    const mw = Services.get("middleware");
     route.get('/roles', await mw.auth.isAuth, await handlers.getRoles);
 
     route.get('/user/:uuid', await mw.auth.isAuth, await handlers.getUserGroup);

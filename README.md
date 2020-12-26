@@ -6,7 +6,7 @@ Uses ES6 Modules, add --experimental-modules and --experimental-json-modules to 
 Folders:
 
     src
-    │   app.js          # App entry point
+    │   application_main.js          # App entry point
     └───api             # Express route controllers for all the endpoints of the app
     └───config          # Environment variables and configuration related stuff
     └───loaders         # Split the startup process into modules

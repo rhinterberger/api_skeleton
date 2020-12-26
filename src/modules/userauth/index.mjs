@@ -1,6 +1,6 @@
 import Router from 'express-promise-router';
-import di from 'typedi';
-import ModuleInterface from "../moduleinterface.mjs";
+import ModuleInterface from "../../core/common/moduleinterface.mjs";
+import Services from "../../core/common/serviceRegistry.mjs";
 
 import queryLoader from "./loaders/sqlqueryloader.mjs";
 import Subscribers from "./subscribers/index.mjs";
@@ -17,15 +17,15 @@ export default class UserAuthModule extends ModuleInterface
 {
     async init()
     {
-        this.logger = di.Container.get('logger');
+        this.logger = Services.get('logger');
 
         // Add Dependencies to global DI
-        di.Container.set('queries', await queryLoader());
-        di.Container.set('events',new Subscribers());
-        di.Container.set('userService',new UserService());
-        di.Container.set('authService',new AuthService());
-        di.Container.set('aclService', new AclService());
-        di.Container.set('groupService', new GroupService());
+        Services.register('queries', await queryLoader());
+        Services.register('events',new Subscribers());
+        Services.register('userService',new UserService());
+        Services.register('authService',new AuthService());
+        Services.register('aclService', new AclService());
+        Services.register('groupService', new GroupService());
         this.logger.info("Init Module UserAuthModule complete");
     }
 
@@ -34,7 +34,7 @@ export default class UserAuthModule extends ModuleInterface
         const router = Router(options);
 
         console.log(options);
-        let middleware = di.Container.get('middleware');
+        let middleware = Services.get('middleware');
         middleware.auth = middlewares;
         router.use('/auth', await authRoutes(options));
         router.use('/user', await userRoutes(options));
@@ -48,6 +48,6 @@ export default class UserAuthModule extends ModuleInterface
     {
         // Cant get correct path in superclass directly.
         // Don't like it this way ...
-        super.roles(await import("./acl.json"));
+        await super.roles(await import("./acl.json"));
     }
 }

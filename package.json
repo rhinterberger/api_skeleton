@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "description": "Backend Api Skeleton",
   "type": "module",
-  "main": "src/app.js",
+  "main": "src/application_main.js",
   "scripts": {
     "start": "node --experimental-modules  --experimental-json-modules",
-    "devstart": "nodemon --experimental-modules  --experimental-json-modules"
+    "devstart": "nodemon --experimental-modules  --experimental-json-modules --trace-uncaught"
   },
   "repository": {
     "type": "git",
@@ -24,7 +24,6 @@
     "express-session": "latest",
     "helmet": "latest",
     "pg": "latest",
-    "typedi": "latest",
     "winston": "latest",
     "authmodule": "file:./src/modules/userauth",
     "testmodule": "file:./src/modules/testmodule"

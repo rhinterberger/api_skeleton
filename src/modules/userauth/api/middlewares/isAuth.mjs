@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import di from 'typedi';
-import generateError from "../../../../util/generateError.mjs";
+import generateError from "../../../../core/common/generateError.mjs";
 
 export default async (req, res, next) => {
 

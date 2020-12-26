@@ -1,14 +1,14 @@
 import Router from 'express-promise-router';
-import di from 'typedi';
+import Services from '../../core/common/serviceRegistry.mjs'
 import moment from "moment";
-import ModuleInterface from "../moduleinterface.mjs";
+import ModuleInterface from "../../core/common/moduleinterface.mjs";
 
 export default class TestModule extends ModuleInterface
 {
     async init()
     {
-        this.db=di.Container.get('database');
-        this.logger = di.Container.get('logger');
+        this.db=Services.get('database');
+        this.logger = Services.get('logger');
         this.logger.info("Init Module TestModule complete");
         const m = new moment();
     }

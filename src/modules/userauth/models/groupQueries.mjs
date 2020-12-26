@@ -1,11 +1,11 @@
-import di from 'typedi';
+import Services from '../../../core/common/serviceRegistry.mjs'
 
 export default class groupQueries
 {
     constructor(database)
     {
         this.db=database;
-        this.queries=di.Container.get('queries');
+        this.queries=Services.get('queries');
     }
 
     async queryCreateGroup(group)

@@ -1,6 +1,6 @@
 import zlib from 'zlib';
 import jwt from 'jsonwebtoken';
-import di from "typedi";
+import Services from '../../../core/common/serviceRegistry.mjs'
 import ConfirmationService from "./confirmationService.mjs";
 import fs from "fs";
 
@@ -8,7 +8,7 @@ export default class TokenService
 {
     constructor()
     {
-        this.config = di.Container.get('config');
+        this.config = Services.get('config');
         this.confirmationService = new ConfirmationService();
     }
 

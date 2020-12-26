@@ -1,13 +1,13 @@
-import di from 'typedi';
+import Services from '../../../core/common/serviceRegistry.mjs'
 import ConfirmationModel from '../models/confirmationModel.mjs';
 
 export default class ConfirmationService {
 
     constructor()
     {
-        this.logger=di.Container.get('logger');
-        this.eventEmitter = di.Container.get('events');
-        this.confirmationModel = new ConfirmationModel(di.Container.get("database"), di.Container.get("config"));
+        this.logger=Services.get('logger');
+        this.eventEmitter = Services.get('events');
+        this.confirmationModel = new ConfirmationModel(Services.get("database"), Services.get("config"));
     }
 
     async sendPasswordReset(user)

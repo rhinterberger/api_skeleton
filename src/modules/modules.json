@@ -1,6 +1,0 @@
-{
-  "enabledModules": [
-    {"apipath" : "/","importpath": "./modules/userauth/index.mjs"},
-    {"apipath" : "/testmodule","importpath": "./modules/testmodule/index.mjs"}
-  ]
-}

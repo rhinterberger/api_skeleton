@@ -1,11 +1,11 @@
 import Router from 'express-promise-router';
-import di from "typedi";
+import Services from '../../../../core/common/serviceRegistry.mjs'
 import handlers from './userhandlers/index.mjs';
 
 export default async (options) => {
     const route = Router(options);
 
-    const mw = di.Container.get("middleware");
+    const mw = Services.get("middleware");
     route.post('/register', await handlers.register);
     route.get('/confirmregister', await handlers.confirmRegister);
 
