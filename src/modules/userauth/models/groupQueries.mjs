@@ -33,13 +33,13 @@ export default class groupQueries
 
     async queryUpdateGroup(group)
     {
-        const res=await this.db.query(this.queries.groupUpdate,[group.name, group.roles, group.uuid]);;
+        const res=await this.db.query(this.queries.groupUpdate,[group.name, group.roles, group.uuid]);
         return res.rowCount;
     }
 
     async queryDeleteGroup(gid)
     {
-        const res=await this.db.query(this.queries.groupDelete,[gid]);;
+        const res=await this.db.query(this.queries.groupDelete,[gid]);
         return res.rowCount;
     }
 

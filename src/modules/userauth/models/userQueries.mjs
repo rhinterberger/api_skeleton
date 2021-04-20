@@ -33,7 +33,7 @@ export default class userQueries
 
     async queryDeleteUser(uuid)
     {
-        const res=await this.db.query(this.queries.userDelete,[uuid]);;
+        const res=await this.db.query(this.queries.userDelete,[uuid]);
         return res.rowCount;
     }
 
